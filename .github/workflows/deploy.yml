@@ -51,11 +51,11 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           
           # Host-Key verifizieren
-          ssh-keyscan -p ${{ secrets.SSH_PORT }} ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+          ssh-keyscan ${{ secrets.HOST }} >> ~/.ssh/known_hosts
           
           # rsync vom Runner ausführen und in einen temporären Ordner kopieren
           # Korrigierter rsync-Befehl mit SSH-Parametern
-          rsync -az -e "ssh -p ${{ secrets.SSH_PORT }} -i ~/.ssh/id_rsa" --progress ./dettmer.dev-website/dist/ ${{ secrets.DIFFUSER_USERNAME }}@${{ secrets.HOST }}:/home/${{ secrets.DIFFUSER_USERNAME }}/tmp_deploy/
+          rsync -az -e "ssh -i ~/.ssh/id_rsa" --progress ./dettmer.dev-website/dist/ ${{ secrets.DIFFUSER_USERNAME }}@${{ secrets.HOST }}:/home/${{ secrets.DIFFUSER_USERNAME }}/tmp_deploy/
         working-directory: '${{ github.workspace }}'
 
       - name: 🔄 Atomic Swap and Clean Up
@@ -64,7 +64,6 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.DIFFUSER_USERNAME }}
           key: ${{ secrets.DIFFUSER_SSH_KEY }}
-          port: ${{ secrets.SSH_PORT }}
           script: |
             # 1. Definiere die Pfade
             NEW_DEPLOY_PATH="/home/${{ secrets.DIFFUSER_USERNAME }}/tmp_deploy"
