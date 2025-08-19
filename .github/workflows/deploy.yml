@@ -12,41 +12,75 @@ jobs:
     # 1. Definiere ein Environment für den Job
     environment:
       name: production
-      url: https://dettmer.dev/ # Optional: Füge die URL deines Ziels hinzu
+      url: https://dettmer.dev/
 
     steps:
-      - name: Checkout Code
+      - name: 📥 Checkout Code
         uses: actions/checkout@v3
+        with:
+          # Stellt sicher, dass das Projekt in den richtigen Ordner geklont wird
+          path: 'dettmer.dev-website'
 
-      - name: Setup Node.js
+      - name: 🔧 Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
 
-      - name: Cache Node.js modules
+      - name: 📦 Cache Node.js modules
         id: cache-npm
         uses: actions/cache@v3
         with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          path: dettmer.dev-website/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/dettmer.dev-website/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: Install Dependencies
+      - name: 🧩 Install Dependencies
         run: npm install
+        working-directory: './dettmer.dev-website'
 
-      # Dieser entscheidende Schritt, der gefehlt hat
-      - name: Build Astro Project
+      - name: 🔨 Build Astro Project
         run: npm run build
+        working-directory: './dettmer.dev-website'
 
-      - name: Setup SSH Key
-        uses: webfactory/ssh-agent@v0.5.4
-        with:
-          ssh-private-key: ${{ secrets.SSH_KEY }}
-
-      - name: Deploy Atomically
+      - name: 🚀 Transfer with rsync
         run: |
-          # 1. Upload new files to a temporary folder
-          scp -r -o StrictHostKeyChecking=no dist/* ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/tmp/dettmer.dev-website/
-          # 2. Use a single SSH command to atomically swap the folders
-          ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'rm -rf /var/www/dettmer.dev/* && cp -R /tmp/dettmer.dev-website/* /var/www/dettmer.dev/ && rm -R /tmp/dettmer.dev-website'
+          # SSH-Key in eine temporäre Datei schreiben
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DIFFUSER_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          
+          # Host-Key verifizieren
+          ssh-keyscan -p ${{ secrets.SSH_PORT }} ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+          
+          # rsync vom Runner ausführen und in einen temporären Ordner kopieren
+          # Korrigierter rsync-Befehl mit SSH-Parametern
+          rsync -az -e "ssh -p ${{ secrets.SSH_PORT }} -i ~/.ssh/id_rsa" --progress ./dettmer.dev-website/dist/ ${{ secrets.DIFFUSER_USERNAME }}@${{ secrets.HOST }}:/home/${{ secrets.DIFFUSER_USERNAME }}/tmp_deploy/
+        working-directory: '${{ github.workspace }}'
+
+      - name: 🔄 Atomic Swap and Clean Up
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.DIFFUSER_USERNAME }}
+          key: ${{ secrets.DIFFUSER_SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            # 1. Definiere die Pfade
+            NEW_DEPLOY_PATH="/home/${{ secrets.DIFFUSER_USERNAME }}/tmp_deploy"
+            FINAL_PATH="/var/www/dettmer.dev"
+            BACKUP_PATH="/var/www/dettmer.dev-old"
+
+            # 2. Entferne das alte Backup-Verzeichnis, falls es existiert
+            sudo rm -rf $BACKUP_PATH
+
+            # 3. Benenne den alten Ordner um (dies ist der Atomic Swap!)
+            # Stelle sicher, dass der Ordner existiert, um Fehler zu vermeiden
+            if [ -d "$FINAL_PATH" ]; then
+              sudo mv $FINAL_PATH $BACKUP_PATH
+            fi
+
+            # 4. Verschiebe den neuen Ordner an den endgültigen Ort
+            sudo mv $NEW_DEPLOY_PATH $FINAL_PATH
+
+            echo "✅ Deployment erfolgreich abgeschlossen."
