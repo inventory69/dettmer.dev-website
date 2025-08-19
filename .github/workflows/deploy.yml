@@ -1,0 +1,52 @@
+name: Deploy Astro Blog
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    # 1. Definiere ein Environment für den Job
+    environment:
+      name: production
+      url: https://dettmer.dev/ # Optional: Füge die URL deines Ziels hinzu
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Cache Node.js modules
+        id: cache-npm
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install Dependencies
+        run: npm install
+
+      # Dieser entscheidende Schritt, der gefehlt hat
+      - name: Build Astro Project
+        run: npm run build
+
+      - name: Setup SSH Key
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Deploy Atomically
+        run: |
+          # 1. Upload new files to a temporary folder
+          scp -r -o StrictHostKeyChecking=no dist/* ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/tmp/dettmer.dev-website/
+          # 2. Use a single SSH command to atomically swap the folders
+          ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'rm -rf /var/www/dettmer.dev/* && cp -R /tmp/dettmer.dev-website/* /var/www/dettmer.dev/ && rm -R /tmp/dettmer.dev-website'
