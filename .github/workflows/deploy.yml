@@ -6,80 +6,34 @@ on:
       - main
 
 jobs:
-  build_and_deploy:
+  build_and_push:
     runs-on: ubuntu-latest
 
-    # 1. Definiere ein Environment für den Job
     environment:
       name: production
       url: https://dettmer.dev/
 
     steps:
       - name: 📥 Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: 🔐 Log in to Docker Hub
+        uses: docker/login-action@v3
         with:
-          # Stellt sicher, dass das Projekt in den richtigen Ordner geklont wird
-          path: 'dettmer.dev-website'
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: 🔧 Setup Node.js
-        uses: actions/setup-node@v3
+      - name: 🏗️ Build and Push Docker Image
+        uses: docker/build-push-action@v5
         with:
-          node-version: '20'
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/dettmer-dev:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/dettmer-dev:${{ github.sha }}
+          platforms: linux/amd64
 
-      - name: 📦 Cache Node.js modules
-        id: cache-npm
-        uses: actions/cache@v3
-        with:
-          path: dettmer.dev-website/node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/dettmer.dev-website/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: 🧩 Install Dependencies
-        run: npm install
-        working-directory: './dettmer.dev-website'
-
-      - name: 🔨 Build Astro Project
-        run: npm run build
-        working-directory: './dettmer.dev-website'
-
-      - name: 🚀 Transfer with rsync
+      - name: 🚀 Trigger Dokploy Deployment
         run: |
-          # SSH-Key in eine temporäre Datei schreiben
-          mkdir -p ~/.ssh
-          echo "${{ secrets.DIFFUSER_SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          
-          # Host-Key verifizieren
-          ssh-keyscan ${{ secrets.HOST }} >> ~/.ssh/known_hosts
-          
-          # rsync vom Runner ausführen und in einen temporären Ordner kopieren
-          # Korrigierter rsync-Befehl mit SSH-Parametern
-          rsync -az -e "ssh -i ~/.ssh/id_rsa" --progress ./dettmer.dev-website/dist/ ${{ secrets.DIFFUSER_USERNAME }}@${{ secrets.HOST }}:/home/${{ secrets.DIFFUSER_USERNAME }}/tmp_deploy/
-        working-directory: '${{ github.workspace }}'
-
-      - name: 🔄 Atomic Swap and Clean Up
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.DIFFUSER_USERNAME }}
-          key: ${{ secrets.DIFFUSER_SSH_KEY }}
-          script: |
-            # 1. Definiere die Pfade
-            NEW_DEPLOY_PATH="/home/${{ secrets.DIFFUSER_USERNAME }}/tmp_deploy"
-            FINAL_PATH="/var/www/dettmer.dev"
-            BACKUP_PATH="/var/www/dettmer.dev-old"
-
-            # 2. Entferne das alte Backup-Verzeichnis, falls es existiert
-            sudo rm -rf $BACKUP_PATH
-
-            # 3. Benenne den alten Ordner um (dies ist der Atomic Swap!)
-            # Stelle sicher, dass der Ordner existiert, um Fehler zu vermeiden
-            if [ -d "$FINAL_PATH" ]; then
-              sudo mv $FINAL_PATH $BACKUP_PATH
-            fi
-
-            # 4. Verschiebe den neuen Ordner an den endgültigen Ort
-            sudo mv $NEW_DEPLOY_PATH $FINAL_PATH
-
-            echo "✅ Deployment erfolgreich abgeschlossen."
+          curl -X POST "${{ secrets.DOKPLOY_URL }}/api/trpc/application.deploy" \n            -H "accept: application/json" \n            -H "x-api-key: ${{ secrets.DOKPLOY_API_KEY }}" \n            -H "Content-Type: application/json" \n            -d "{"json":{"applicationId":"${{ secrets.DOKPLOY_APP_ID }}"}}" && echo "" && echo "✅ Docker image pushed and Dokploy deployment triggered!"
