@@ -36,12 +36,16 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+          
+          # Add verified server host key
+          echo "|1|uEF7GjVGGXWRs0rXLbyGVOOzSk0=|QALjxsKkTM2MKhuxqKonOdOsUdI= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCzAUTuh/SfmEgreSWdHUhWCCrLkbHbmcJIY9PydIA3jUWpx6ccSIxRbBhkLsWVfpEth9H5827ROPQP1JfrR4eB5qV3bmQIBrVPbm9Tjz3ZEyVyMrEjOqaiHOrblrBqRgNREcGLZ4o/fDeqWTyvTrhKlKY4twlh/S9Xjd8PBm+ZlV4vwRxt74po0gv544fQts1iILQXU3uRs0gyYczWoyJXUgV6X5cfgQQXXPYjfkw4/1Q4brFtKsUoKy7s3XhtM9ub9HIPRnXAoXKs576JbQoPQZZoKdV6VfqtHZwA1NGqwN/PtKAgdiDAiWL+e0q90xN3pWfGZ50dvwI6KsApNNV/b/IRlDPgkr5uRhqflXo6zzI+W0ywnHOBaEUFMVcqZTuzLanHoWX2or62H6jR4H7opbArpvgUOq8oQY0dKQ4ZgIcaMYRDNf1Zt/69PmITap712UzDo1eZA6g/TQ2k/UUGU76dmNjPnlju40Y6CqtFIDeJpJHvX7cnNou/w7GaTPs=" >> ~/.ssh/known_hosts
+          echo "|1|p8vo3+FabDui31LMbk6tBEnpgGQ=|9sfeY+CVKwP92w0BOXn435CXUDc= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDQnsIM5YbEo/+qXtuyS0r7OLlag5kDnVL0ePBhuvkMMQvwVeCoth/NFlFKHnj1jWMoz773JnhgN4t8B1UcK8HM=" >> ~/.ssh/known_hosts
+          echo "|1|Fq/dYTR5LRfy/Qucksa/el7ejlY=|GdDQxUHyCpSXNDDB0yH+6tcGaMU= ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDk2etS+0F6RpDeWKwDczZ5uPnfyDVhsfV+q4QNzDl4C" >> ~/.ssh/known_hosts
 
       - name: 🚀 Deploy via rsync
         run: |
           rsync -avz --delete \
-            -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" \
+            -e "ssh -i ~/.ssh/id_rsa" \
             ./dist/ \
             github-actions@${{ secrets.SERVER_HOST }}:/var/www/dettmer.dev/
           
