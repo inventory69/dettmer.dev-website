@@ -36,4 +36,9 @@ jobs:
 
       - name: 🚀 Trigger Dokploy Deployment
         run: |
-          curl -X POST "${{ secrets.DOKPLOY_URL }}/api/trpc/application.deploy" \n            -H "accept: application/json" \n            -H "x-api-key: ${{ secrets.DOKPLOY_API_KEY }}" \n            -H "Content-Type: application/json" \n            -d "{"json":{"applicationId":"${{ secrets.DOKPLOY_APP_ID }}"}}" && echo "" && echo "✅ Docker image pushed and Dokploy deployment triggered!"
+          curl -X POST "${{ secrets.DOKPLOY_URL }}/api/trpc/application.deploy" \
+            -H "accept: application/json" \
+            -H "x-api-key: ${{ secrets.DOKPLOY_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{"json":{"applicationId":"${{ secrets.DOKPLOY_APP_ID }}"}}' \
+            && echo "✅ Docker image pushed and Dokploy deployment triggered!"
