@@ -10,8 +10,8 @@ worksImage1:
 worksImage2:
   url: "/images/discord-bot-welcome.webp"
   alt: "Discord Bot Interface"
-platform: Discord / Web API
-stack: Python, Flask, PostgreSQL, Redis, Docker
+platform: Discord Bot + REST API
+stack: Python 3.13, Discord.py 2.0+, Flask 3.0+, SQLite, Redis, Docker
 ---
 
 Started as a simple Discord moderation bot. Then someone asked "wouldn't it be cool if it could generate memes?"
@@ -20,14 +20,26 @@ And then "what about analytics?" And somehow it turned into a full community man
 Has AI-powered meme generation, real-time activity tracking, Rocket League stats integration, push notifications,
 and a REST API for the admin panel. Started small, kept adding features whenever something seemed interesting.
 
-Backend is Python with Flask because it's lightweight and doesn't get in the way. PostgreSQL handles all the data -
-user profiles, meme templates, activity logs, everything. Redis sits in front as a caching layer because
-hitting the database for every request is asking for performance problems.
+**Built with 26 modular cogs** totaling **62,121 lines of code**. Each feature is a separate, hot-reloadable module.
+The API evolved from a 6,500-line monolith into a clean Blueprint architecture with **50+ endpoints**.
 
-JWT authentication, Firebase Cloud Messaging for push notifications. The usual suspects.
+Backend is Python 3.13 with Flask because it's lightweight and doesn't get in the way. **SQLite** handles all the data -
+user profiles, meme templates, activity logs, everything. Table partitioning keeps analytics queries fast.
+Redis sits in front as a caching layer because hitting the database for every request is asking for performance problems.
+
+JWT authentication with role-based access control. Firebase Cloud Messaging for push notifications. The usual suspects.
 
 Everything runs in Docker containers because I got tired of "but it works on my machine" excuses.
 Containerize everything, deploy anywhere, sleep better at night.
+
+## Architecture
+
+Modular cog system makes everything maintainable. Want to add a feature? Create a new cog. Need to fix something?
+Reload just that cog without restarting the entire bot. Each of the 26 cogs handles its own thing - memes,
+tickets, analytics, Rocket League stats, whatever.
+
+API follows Blueprint pattern. Clean separation of concerns. Auth routes, analytics routes, meme routes - all separate.
+Makes debugging actually possible when something breaks at 3am.
 
 ## Features
 
@@ -41,14 +53,14 @@ Containerize everything, deploy anywhere, sleep better at night.
 
 ## Tech Stack
 
-Built the API with Flask because it's lightweight and does what it needs to do. Discord.py handles all the bot interactions -
-commands, events, message handling.
+Built the API with Flask 3.0+ because it's lightweight and does what it needs to do. Discord.py 2.0+ handles all the bot interactions -
+commands, events, message handling. Modern Python 3.13 for performance and type hints.
 
-PostgreSQL with SQLAlchemy ORM. Could've used something simpler but needed proper relational data for the analytics.
-Redis caches API responses and frequently accessed data.
+**SQLite** with SQLAlchemy ORM. Simpler than PostgreSQL, still plenty powerful for what this needs. Table partitioning
+keeps analytics data organized and queries fast. Redis caches API responses and frequently accessed data.
 
 JWT for authentication. Admin panel connects via REST API with token auth. Push notifications through Firebase Cloud Messaging.
 
 Everything containerized with Docker. Makes deployment consistent across dev and prod. No more environment issues.
 
-**Stack**: Python 3.13 · Discord.py · Flask · PostgreSQL · Redis · Docker · JWT · FCM
+**Stack**: Python 3.13 · Discord.py 2.0+ · Flask 3.0+ · SQLite · Redis · Docker · JWT · FCM
