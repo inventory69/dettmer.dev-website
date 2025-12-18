@@ -221,15 +221,63 @@ li {
 .skills {
   margin-top: 8px;
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  overflow-x: auto;
-  gap: 16px;
+  gap: 20px 24px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.skill-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.skill-item[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-secondary);
+  color: var(--text);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.skill-item[data-tooltip]:hover::after {
+  opacity: 1;
 }
 
 .skills__img {
   flex-shrink: 0;
+  display: block;
+}
+
+/* Tablet breakpoint */
+@media (min-width: 481px) {
+  .skills {
+    max-width: 700px;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 769px) {
+  .skills {
+    max-width: 800px;
+  }
 }
 
 /* Items */
@@ -420,7 +468,12 @@ html.light {
   .skills__img {
     height: 30px;
     width: 30px;
-    margin: 8px 1px;
+  }
+  
+  .skill-item[data-tooltip]::after {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    bottom: -28px;
   }
 
   .badge__list {
