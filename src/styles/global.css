@@ -306,6 +306,9 @@ li {
     box-shadow 0.3s ease;
   background: var(--background);
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
 }
 
 .pro-img:hover {
@@ -328,6 +331,7 @@ li {
   justify-content: center;
   opacity: 0;
   transition: opacity 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .lightbox.active {
