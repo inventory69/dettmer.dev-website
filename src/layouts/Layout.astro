@@ -46,16 +46,30 @@ const { pageTitle } = Astro.props;
       <slot />
       <Footer />
     </main>
-    <script>
+    <script is:inline>
       function colorMode() {
-        if (
-          localStorage.theme === "light" ||
-          (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: light)").matches)
-        ) {
+        // Prüfe localStorage, sonst System-Präferenz
+        const savedTheme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+        
+        let theme;
+        if (savedTheme) {
+          theme = savedTheme;
+        } else if (prefersLight) {
+          theme = "light";
+        } else {
+          theme = "dark"; // Default oder wenn prefersDark
+        }
+        
+        if (theme === "light") {
           document.documentElement.classList.add("light");
         } else {
           document.documentElement.classList.remove("light");
         }
+        
+        // Speichere die initiale Präferenz
+        localStorage.setItem("theme", theme);
       }
 
       colorMode();
