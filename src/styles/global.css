@@ -244,8 +244,8 @@ li {
   bottom: -32px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--bg-secondary);
-  color: var(--text);
+  background: #2d2d3d;
+  color: #eff1f5;
   padding: 6px 12px;
   border-radius: 6px;
   font-size: 0.85rem;
@@ -441,6 +441,12 @@ html.light {
 
 .light .icon__link:hover {
   border-color: var(--text-link-light);
+}
+
+.light .skill-item[data-tooltip]::after {
+  background: #1e1e2e;
+  color: #eff1f5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* Media Query */
