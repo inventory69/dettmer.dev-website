@@ -15,15 +15,15 @@ stack: Astro 4.x, TypeScript, Sharp, GLightbox, Discord API, Node.js, Python
 website: https://gallery.voidtales.win
 ---
 
-Built for the **VoidTales Action RPG server** community. Players needed an easy way to share screenshots, builds, 
+Built for the **VoidTales Action RPG server** community. Players needed an easy way to share screenshots, builds,
 and epic moments without relying on third-party image hosts that shut down or start limiting uploads.
 
 The magic happens through a **custom n8n workflow** that connects everything. Players drop images in a dedicated Discord channel,
 and the automation handles the rest. Built an extensive workflow with pre-checks, validation, image processing, metadata extraction,
 and automatic deployment to the gallery.
 
-Static site built with **Astro 4.x** for blazing-fast performance. Discord integration means zero friction for users - 
-they just post in Discord like they normally would. Behind the scenes, n8n orchestrates the entire pipeline from Discord 
+Static site built with **Astro 4.x** for blazing-fast performance. Discord integration means zero friction for users -
+they just post in Discord like they normally would. Behind the scenes, n8n orchestrates the entire pipeline from Discord
 message to live gallery entry.
 
 Automatic **WebP thumbnail generation** at three resolutions (200px, 400px, 800px), lazy loading with infinite scroll,

@@ -25,9 +25,10 @@ Visit: **[dettmer.dev](https://dettmer.dev)**
 - **GitHub Actions** - CI/CD automation
 - **rsync** - Production deployment
 
-##  Deployment
+## Deployment
 
 Automated deployment pipeline:
+
 - Push to `main` triggers GitHub Actions
 - Builds static site with Astro
 - Deploys via rsync to production server

@@ -1,4 +1,4 @@
-import eslintPluginAstro from 'eslint-plugin-astro';
+import eslintPluginAstro from "eslint-plugin-astro";
 
 export default [
   // Recommended Astro config
@@ -6,7 +6,7 @@ export default [
   {
     rules: {
       // Add your custom rules here
-      'no-unused-vars': 'warn',
+      "no-unused-vars": "warn",
     },
   },
 ];

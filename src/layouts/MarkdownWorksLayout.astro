@@ -8,6 +8,20 @@ const { frontmatter } = Astro.props;
     <img src="/images/laptop.webp" role="presentation" width="300" height="259" decoding="async" />
   </div>
   <h2>{frontmatter.title}</h2>
+  <div class="project-images">
+    <img
+      class="pro-img"
+      src={frontmatter.worksImage1.url}
+      alt={frontmatter.worksImage1.alt}
+      loading="lazy"
+    />
+    <img
+      class="pro-img"
+      src={frontmatter.worksImage2.url}
+      alt={frontmatter.worksImage2.alt}
+      loading="lazy"
+    />
+  </div>
   <slot />
   <ul class="badge__list">
     <li><span class="badge badge--item">PLATFORM</span>{frontmatter.platform}</li>
@@ -37,18 +51,35 @@ const { frontmatter } = Astro.props;
       )
     }
   </ul>
-  <div class="project-images">
-    <img
-      class="pro-img"
-      src={frontmatter.worksImage1.url}
-      alt={frontmatter.worksImage1.alt}
-      loading="lazy"
-    />
-    <img
-      class="pro-img"
-      src={frontmatter.worksImage2.url}
-      alt={frontmatter.worksImage2.alt}
-      loading="lazy"
-    />
+
+  <!-- Lightbox Overlay -->
+  <div id="lightbox" class="lightbox">
+    <img id="lightbox-img" src="" alt="" />
   </div>
 </BaseLayout>
+
+<script>
+  // Lightbox Funktionalität
+  const images = document.querySelectorAll(".pro-img");
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+
+  images.forEach((img) => {
+    img.addEventListener("click", () => {
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add("active");
+    });
+  });
+
+  lightbox.addEventListener("click", () => {
+    lightbox.classList.remove("active");
+  });
+
+  // ESC zum Schließen
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && lightbox.classList.contains("active")) {
+      lightbox.classList.remove("active");
+    }
+  });
+</script>

@@ -305,11 +305,42 @@ li {
     transform 0.3s ease,
     box-shadow 0.3s ease;
   background: var(--background);
+  cursor: pointer;
 }
 
 .pro-img:hover {
   transform: scale(1.02);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox.active {
+  display: flex;
+  opacity: 1;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
 /* Footer */
@@ -475,7 +506,7 @@ html.light {
     height: 30px;
     width: 30px;
   }
-  
+
   .skill-item[data-tooltip]::after {
     font-size: 0.75rem;
     padding: 4px 8px;
