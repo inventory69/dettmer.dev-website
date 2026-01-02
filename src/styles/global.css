@@ -287,20 +287,20 @@ li {
 
 .project-images {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin: 2rem 0;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 3rem 0 2rem 0;
 }
 
 .pro-img {
-  border-radius: 16px;
+  border-radius: 12px;
   width: 100%;
   height: auto;
-  max-height: 600px;
+  max-height: 350px;
   object-fit: cover;
   object-position: center top;
   display: block;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
@@ -312,8 +312,8 @@ li {
 }
 
 .pro-img:hover {
-  transform: scale(1.02);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transform: scale(1.03);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
 }
 
 /* Lightbox */
