@@ -8,7 +8,6 @@ const { frontmatter } = Astro.props;
     <img src="/images/laptop.webp" role="presentation" width="300" height="259" decoding="async" />
   </div>
   <h2>{frontmatter.title}</h2>
-  <slot />
   <div class="project-images">
     <img
       class="pro-img"
@@ -23,6 +22,7 @@ const { frontmatter } = Astro.props;
       loading="lazy"
     />
   </div>
+  <slot />
   <ul class="badge__list">
     <li><span class="badge badge--item">PLATFORM</span>{frontmatter.platform}</li>
     <li><span class="badge badge--item">STACK</span>{frontmatter.stack}</li>
