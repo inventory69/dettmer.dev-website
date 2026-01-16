@@ -1,6 +1,6 @@
 ---
 title: "Post 3"
-author: Tristen Tomczak
+author: Fabian Dettmer
 date: "03-23-2025"
 image:
   url: "/.netlify/images?url=/images/blog-post.webp"
