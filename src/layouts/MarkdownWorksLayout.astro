@@ -1,9 +1,14 @@
 ---
 import BaseLayout from "./Layout.astro";
 const { frontmatter } = Astro.props;
+const pageTitle = `${frontmatter.title} | Portfolio | Fabian Dettmer`;
 ---
 
-<BaseLayout pageTitle={frontmatter.title}>
+<BaseLayout 
+  pageTitle={pageTitle} 
+  description={frontmatter.description}
+  image={frontmatter.image.url}
+>
   <div class="gif">
     <img src="/images/laptop.webp" role="presentation" width="300" height="259" decoding="async" />
   </div>

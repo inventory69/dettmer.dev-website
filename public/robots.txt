@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://dettmer.dev/sitemap-index.xml
+
+# Crawl-delay (optional, be friendly to servers)
+Crawl-delay: 0
