@@ -3,10 +3,11 @@ import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 const allProjects = await getCollection("projects");
-const pageTitle = "Works";
+const pageTitle = "Projects & Portfolio | Fabian Dettmer";
+const description = "Portfolio of Android apps, Discord bots, Flutter admin panels, and self-hosted projects. Built with Python, Flutter, Kotlin, Docker, and modern web technologies.";
 ---
 
-<Layout pageTitle={pageTitle}>
+<Layout pageTitle={pageTitle} description={description} image="/images/laptop.webp">
   <div class="gif">
     <img src="/images/laptop.webp" role="presentation" width="300" height="259" decoding="async" />
   </div>
