@@ -1,0 +1,28 @@
+{
+  "name": "Fabian Dettmer - Developer Portfolio",
+  "short_name": "FD Portfolio",
+  "description": "Full-Stack Developer & Sysadmin - Building Android apps, Discord bots, APIs, and self-hosted infrastructure.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1e1e2e",
+  "theme_color": "#6366f1",
+  "icons": [
+    {
+      "src": "/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
