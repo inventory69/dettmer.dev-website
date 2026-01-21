@@ -1,38 +1,47 @@
-# dettmer.dev 🚀
+<div align="center">
 
-> My personal portfolio website
+# dettmer.dev
 
-[![Live](https://img.shields.io/badge/Live-dettmer.dev-78c2ad.svg)](https://dettmer.dev)
+**Personal Portfolio**
 
-This is my personal portfolio showcasing my projects, tech stack, and interests. Built with Astro and deployed via GitHub Actions.
+[![Live](https://img.shields.io/badge/🌐_Live-dettmer.dev-78c2ad?style=for-the-badge)](https://dettmer.dev)
+[![Astro](https://img.shields.io/badge/Astro-5.x-BC52EE?style=for-the-badge&logo=astro&logoColor=white)](https://astro.build)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
-## 🔗 Live
-
-Visit: **[dettmer.dev](https://dettmer.dev)**
-
-## ✨ Features
-
-- 🎨 Dark/Light mode
-- 📱 Responsive design
-- ⚡ Fast loading times
-- 🔐 Automated deployment
-
-## 🛠️ Tech Stack
-
-- **Astro 5.x** - Static site generator
-- **TypeScript** - Type safety
-- **CSS3** - Custom styling
-- **GitHub Actions** - CI/CD automation
-- **rsync** - Production deployment
-
-## Deployment
-
-Automated deployment pipeline:
-
-- Push to `main` triggers GitHub Actions
-- Builds static site with Astro
-- Deploys via rsync to production server
+</div>
 
 ---
 
-**Note:** This is a personal project. The repository is public for transparency, but the site content is specific to my portfolio.
+<div align="center">
+
+🎨 Dark/Light Mode &nbsp;•&nbsp; 📱 Responsive &nbsp;•&nbsp; ⚡ Fast &nbsp;•&nbsp; 🚀 Auto-Deploy
+
+</div>
+
+---
+
+## Stack
+
+| Layer | Tech |
+|:---:|:---|
+| 🎨 | Astro 5.x • TypeScript • CSS3 |
+| 🚀 | GitHub Actions • rsync |
+
+## Deploy
+
+```
+push main → build → rsync → live
+```
+
+---
+
+## Credits
+
+Based on [**Milky-Way**](https://github.com/ttomczak3/Milky-Way) by [@ttomczak3](https://github.com/ttomczak3)  
+A minimalist Astro portfolio template ✨
+
+---
+
+<div align="center">
+<sub>Personal project • Public for transparency</sub>
+</div>
