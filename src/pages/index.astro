@@ -5,6 +5,49 @@ const description = "Full-Stack Developer specializing in Python, Flutter, Kotli
 ---
 
 <Layout pageTitle={pageTitle} description={description}>
+  <!-- Schema.org Person for Knowledge Panel -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Fabian Dettmer",
+    "alternateName": ["Fabian D.", "inventory69"],
+    "url": "https://dettmer.dev",
+    "image": "https://dettmer.dev/images/space.webp",
+    "jobTitle": "Full-Stack Developer & Sysadmin",
+    "description": "Full-Stack Developer specializing in Python, Flutter, Kotlin, and self-hosted infrastructure",
+    "email": "admin@dettmer.dev",
+    "sameAs": [
+      "https://github.com/inventory69",
+      "https://f-droid.org/packages/dev.dettmer.simplenotes/"
+    ],
+    "knowsAbout": [
+      "Python", "Flutter", "Kotlin", "Docker", "Linux", 
+      "Android Development", "Discord Bots", "Self-Hosting", "Astro"
+    ],
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Freelance"
+    },
+    "nationality": {
+      "@type": "Country",
+      "name": "Germany"
+    }
+  })} />
+  
+  <!-- Schema.org WebSite -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Fabian Dettmer - Developer Portfolio",
+    "alternateName": "dettmer.dev",
+    "url": "https://dettmer.dev",
+    "description": "Full-Stack Developer & Sysadmin Portfolio",
+    "author": {
+      "@type": "Person",
+      "name": "Fabian Dettmer"
+    }
+  })} />
+
   <div class="gif">
     <img src="/images/space.webp" role="presentation" width="300" height="259" decoding="async" />
   </div>
@@ -134,6 +177,11 @@ const description = "Full-Stack Developer specializing in Python, Flutter, Kotli
     Built Discord bots that actually do useful stuff, admin panels that don't make you want to cry,
     image galleries for personal use, and a bunch of self-hosted infrastructure that somehow stays
     running.
+  </p>
+  <p>
+    Latest project: <a href="/projects/simple-notes/">Simple Notes Sync</a> - a privacy-first 
+    note-taking app with WebDAV sync. Works offline, syncs to your own server, battery-efficient.
+    Built with Kotlin and Jetpack Compose.
   </p>
   <p>
     Most projects start with "wouldn't it be cool if..." and end up being way more complex than

@@ -40,6 +40,19 @@ const ogImage = new URL(image, Astro.site || 'https://dettmer.dev');
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#6366f1" />
     
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="uVUK6cfrpZ-BQj7H401yZTmwNjcphzh3vvtlqbEu80k" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MPHP1CKWMN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-MPHP1CKWMN');
+    </script>
+    
     <!-- Primary Meta Tags -->
     <title>{pageTitle}</title>
     <meta name="title" content={pageTitle} />
