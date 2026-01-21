@@ -217,6 +217,27 @@ li {
   cursor: pointer;
 }
 
+/* Featured Link */
+.featured-link {
+  color: var(--text-link);
+  text-decoration: underline;
+  text-decoration-color: var(--text-link);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  font-family: var(--body);
+  font-weight: 600;
+  transition:
+    text-decoration-color 0.3s ease,
+    color 0.3s ease,
+    text-decoration-thickness 0.2s ease;
+}
+
+.featured-link:hover {
+  color: var(--button);
+  text-decoration-color: var(--button);
+  text-decoration-thickness: 3px;
+}
+
 /* Skills */
 .skills {
   margin-top: 8px;
@@ -482,6 +503,16 @@ html.light {
   background: #1e1e2e;
   color: #eff1f5;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.light .featured-link {
+  color: var(--text-link-light);
+  text-decoration-color: var(--text-link-light);
+}
+
+.light .featured-link:hover {
+  color: var(--button);
+  text-decoration-color: var(--button);
 }
 
 /* Media Query */
