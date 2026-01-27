@@ -1,53 +1,68 @@
 ---
 import Layout from "../layouts/Layout.astro";
 const pageTitle = "Fabian Dettmer | Full-Stack Developer & Sysadmin";
-const description = "Full-Stack Developer specializing in Python, Flutter, Kotlin, and self-hosted infrastructure. Building Android apps, Discord bots, APIs, and admin dashboards. Explore my projects and tech stack.";
+const description =
+  "Full-Stack Developer specializing in Python, Flutter, Kotlin, and self-hosted infrastructure. Building Android apps, Discord bots, APIs, and admin dashboards. Explore my projects and tech stack.";
 ---
 
 <Layout pageTitle={pageTitle} description={description}>
   <!-- Schema.org Person for Knowledge Panel -->
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Fabian Dettmer",
-    "alternateName": ["Fabian D.", "inventory69"],
-    "url": "https://dettmer.dev",
-    "image": "https://dettmer.dev/images/space.webp",
-    "jobTitle": "Full-Stack Developer & Sysadmin",
-    "description": "Full-Stack Developer specializing in Python, Flutter, Kotlin, and self-hosted infrastructure",
-    "email": "admin@dettmer.dev",
-    "sameAs": [
-      "https://www.wikidata.org/wiki/Q137838272",
-      "https://github.com/inventory69",
-      "https://f-droid.org/packages/dev.dettmer.simplenotes/"
-    ],
-    "knowsAbout": [
-      "Python", "Flutter", "Kotlin", "Docker", "Linux", 
-      "Android Development", "Discord Bots", "Self-Hosting", "Astro"
-    ],
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Freelance"
-    },
-    "nationality": {
-      "@type": "Country",
-      "name": "Germany"
-    }
-  })} />
-  
-  <!-- Schema.org WebSite -->
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Fabian Dettmer - Developer Portfolio",
-    "alternateName": "dettmer.dev",
-    "url": "https://dettmer.dev",
-    "description": "Full-Stack Developer & Sysadmin Portfolio",
-    "author": {
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      "@context": "https://schema.org",
       "@type": "Person",
-      "name": "Fabian Dettmer"
-    }
-  })} />
+      name: "Fabian Dettmer",
+      alternateName: ["Fabian D.", "inventory69"],
+      url: "https://dettmer.dev",
+      image: "https://dettmer.dev/images/space.webp",
+      jobTitle: "Full-Stack Developer & Sysadmin",
+      description:
+        "Full-Stack Developer specializing in Python, Flutter, Kotlin, and self-hosted infrastructure",
+      email: "admin@dettmer.dev",
+      sameAs: [
+        "https://www.wikidata.org/wiki/Q137838272",
+        "https://github.com/inventory69",
+        "https://f-droid.org/packages/dev.dettmer.simplenotes/",
+      ],
+      knowsAbout: [
+        "Python",
+        "Flutter",
+        "Kotlin",
+        "Docker",
+        "Linux",
+        "Android Development",
+        "Discord Bots",
+        "Self-Hosting",
+        "Astro",
+      ],
+      worksFor: {
+        "@type": "Organization",
+        name: "Freelance",
+      },
+      nationality: {
+        "@type": "Country",
+        name: "Germany",
+      },
+    })}
+  />
+
+  <!-- Schema.org WebSite -->
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "Fabian Dettmer - Developer Portfolio",
+      alternateName: "dettmer.dev",
+      url: "https://dettmer.dev",
+      description: "Full-Stack Developer & Sysadmin Portfolio",
+      author: {
+        "@type": "Person",
+        name: "Fabian Dettmer",
+      },
+    })}
+  />
 
   <div class="gif">
     <img src="/images/space.webp" role="presentation" width="300" height="259" decoding="async" />
@@ -83,6 +98,24 @@ const description = "Full-Stack Developer specializing in Python, Flutter, Kotli
         height="46"
         alt="Python"
         src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
+      />
+    </div>
+    <div class="skill-item" data-tooltip="Kotlin">
+      <img
+        class="skills__img"
+        width="46"
+        height="46"
+        alt="Kotlin"
+        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg"
+      />
+    </div>
+    <div class="skill-item" data-tooltip="Jetpack Compose">
+      <img
+        class="skills__img"
+        width="46"
+        height="46"
+        alt="Jetpack Compose"
+        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jetpackcompose/jetpackcompose-original.svg"
       />
     </div>
     <div class="skill-item" data-tooltip="Flutter">
@@ -180,8 +213,8 @@ const description = "Full-Stack Developer specializing in Python, Flutter, Kotli
     running.
   </p>
   <p>
-    Latest project: <a href="/projects/simple-notes/" class="featured-link">Simple Notes Sync</a> - a privacy-first 
-    note-taking app with WebDAV sync. Works offline, syncs to your own server, battery-efficient.
+    Latest project: <a href="/projects/simple-notes/" class="featured-link">Simple Notes Sync</a> - a
+    privacy-first note-taking app with WebDAV sync. Works offline, syncs to your own server, battery-efficient.
     Built with Kotlin and Jetpack Compose.
   </p>
   <p>
@@ -194,7 +227,9 @@ const description = "Full-Stack Developer specializing in Python, Flutter, Kotli
     </a>
   </div>
   <h2>when i'm not staring at terminals</h2>
-  <p>Family time is the most important thing in my life. Can't spend all day in front of screens.</p>
+  <p>
+    Family time is the most important thing in my life. Can't spend all day in front of screens.
+  </p>
   <p>
     When I actually leave the house: cycling, swimming, basketball. Turns out physical activity is
     good for you. Who knew.

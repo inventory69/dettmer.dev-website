@@ -26,7 +26,7 @@ The API evolved from a massive single file into a clean Blueprint architecture. 
 Backend is Python with discord.py 2.0+ and Flask 3.0+ because they're solid and don't overcomplicate things. **SQLite** handles all the data -
 user analytics, ticket transcripts, meme cache, session tracking. Table partitioning keeps analytics queries fast even with growing data.
 
-JWT authentication with role-based access for the Flutter admin panel. WebSocket support for real-time ticket updates. 
+JWT authentication with role-based access for the Flutter admin panel. WebSocket support for real-time ticket updates.
 Push notifications that intelligently suppress when you're already viewing the conversation.
 
 Everything runs in Docker containers. Development and production environments stay consistent. No "works on my machine" problems.

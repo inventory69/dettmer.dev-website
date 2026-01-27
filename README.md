@@ -22,10 +22,10 @@
 
 ## Stack
 
-| Layer | Tech |
-|:---:|:---|
-| 🎨 | Astro 5.x • TypeScript • CSS3 |
-| 🚀 | GitHub Actions • rsync |
+| Layer | Tech                          |
+| :---: | :---------------------------- |
+|  🎨   | Astro 5.x • TypeScript • CSS3 |
+|  🚀   | GitHub Actions • rsync        |
 
 ## Deploy
 

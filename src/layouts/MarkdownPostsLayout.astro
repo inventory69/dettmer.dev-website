@@ -4,9 +4,10 @@ const { frontmatter } = Astro.props;
 const pageTitle = `${frontmatter.title} | Blog | Fabian Dettmer`;
 ---
 
-<BaseLayout 
-  pageTitle={pageTitle} 
-  description={frontmatter.description || `${frontmatter.title} - Blog post by ${frontmatter.author}`}
+<BaseLayout
+  pageTitle={pageTitle}
+  description={frontmatter.description ||
+    `${frontmatter.title} - Blog post by ${frontmatter.author}`}
   image={frontmatter.image?.url || "/images/blog.webp"}
   type="article"
   publishedTime={frontmatter.date}
