@@ -5,77 +5,79 @@ const pageTitle = `${frontmatter.title} | Portfolio | Fabian Dettmer`;
 
 // Generate structured data for projects
 const isSimpleNotes = frontmatter.title?.includes("Simple Notes");
-const structuredData = isSimpleNotes ? {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Simple Notes Sync",
-  "alternateName": "simple-notes-sync",
-  "description": frontmatter.description,
-  "applicationCategory": "UtilitiesApplication",
-  "operatingSystem": "Android 8.0+",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "EUR"
-  },
-  "author": {
-    "@type": "Person",
-    "name": "Fabian Dettmer",
-    "url": "https://dettmer.dev"
-  },
-  "downloadUrl": "https://github.com/inventory69/simple-notes-sync/releases/latest",
-  "installUrl": "https://f-droid.org/packages/dev.dettmer.simplenotes/",
-  "softwareVersion": "1.5.0",
-  "screenshot": `https://dettmer.dev${frontmatter.image.url}`
-} : {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": frontmatter.title,
-  "description": frontmatter.description,
-  "applicationCategory": "DeveloperApplication",
-  "author": {
-    "@type": "Person",
-    "name": "Fabian Dettmer",
-    "url": "https://dettmer.dev"
-  },
-  "screenshot": `https://dettmer.dev${frontmatter.image.url}`
-};
+const structuredData = isSimpleNotes
+  ? {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: "Simple Notes Sync",
+      alternateName: "simple-notes-sync",
+      description: frontmatter.description,
+      applicationCategory: "UtilitiesApplication",
+      operatingSystem: "Android 8.0+",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "EUR",
+      },
+      author: {
+        "@type": "Person",
+        name: "Fabian Dettmer",
+        url: "https://dettmer.dev",
+      },
+      downloadUrl: "https://github.com/inventory69/simple-notes-sync/releases/latest",
+      installUrl: "https://f-droid.org/packages/dev.dettmer.simplenotes/",
+      softwareVersion: "1.5.0",
+      screenshot: `https://dettmer.dev${frontmatter.image.url}`,
+    }
+  : {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: frontmatter.title,
+      description: frontmatter.description,
+      applicationCategory: "DeveloperApplication",
+      author: {
+        "@type": "Person",
+        name: "Fabian Dettmer",
+        url: "https://dettmer.dev",
+      },
+      screenshot: `https://dettmer.dev${frontmatter.image.url}`,
+    };
 
 // Breadcrumb structured data
 const breadcrumbData = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
-  "itemListElement": [
+  itemListElement: [
     {
       "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://dettmer.dev"
+      position: 1,
+      name: "Home",
+      item: "https://dettmer.dev",
     },
     {
       "@type": "ListItem",
-      "position": 2,
-      "name": "Projects",
-      "item": "https://dettmer.dev/works/"
+      position: 2,
+      name: "Projects",
+      item: "https://dettmer.dev/works/",
     },
     {
       "@type": "ListItem",
-      "position": 3,
-      "name": frontmatter.title,
-      "item": `https://dettmer.dev${Astro.url.pathname}`
-    }
-  ]
+      position: 3,
+      name: frontmatter.title,
+      item: `https://dettmer.dev${Astro.url.pathname}`,
+    },
+  ],
 };
 ---
 
-<BaseLayout 
-  pageTitle={pageTitle} 
+<BaseLayout
+  pageTitle={pageTitle}
   description={frontmatter.description}
   image={frontmatter.image.url}
 >
   <!-- SoftwareApplication Schema -->
   <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
-  
+
   <!-- BreadcrumbList Schema -->
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbData)} />
 
