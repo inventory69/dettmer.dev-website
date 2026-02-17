@@ -1,56 +1,78 @@
 ---
 title: "Simple Notes Sync - Privacy-First Note-Taking"
-description: "Minimalist offline notes with automatic WebDAV sync to your own server"
+description: "Minimalist offline-first note-taking app with automatic WebDAV sync, checklists, Glance widgets, and full Markdown export – built with Kotlin & Jetpack Compose"
 image:
   url: "/images/simple-notes-main.webp"
   alt: "Simple Notes Sync App - Jetpack Compose UI"
 worksImage1:
   url: "/images/simple-notes-main.webp"
-  alt: "Simple Notes Sync Homescreen with Note List"
+  alt: "Simple Notes Sync - Note List with Material You Design"
 worksImage2:
+  url: "/images/simple-notes-editor.webp"
+  alt: "Note Editor with Checklist and Markdown Support"
+worksImage3:
   url: "/images/simple-notes-settings.webp"
-  alt: "Modernized Settings with 7 Categories"
-platform: Android 8.0+ (Self-Hosted Backend)
-stack: Kotlin, Jetpack Compose, Material Design 3, WebDAV, Docker
+  alt: "Settings with 7 Categories and Sync Configuration"
+platform: Android 7.0+ (Self-Hosted Backend)
+stack: Kotlin, Jetpack Compose, Material Design 3, Glance Widgets, WebDAV, Docker
 github: https://github.com/inventory69/simple-notes-sync
+fdroid: https://f-droid.org/packages/dev.dettmer.simplenotes/
+download: https://github.com/inventory69/simple-notes-sync/releases/latest
 ---
 
 Built because existing note apps either lock you into their cloud or require complex self-hosted setups.
 Needed something that works offline, syncs to a server you control, and doesn't drain your battery.
 
-**Rebuilt with Jetpack Compose in v1.5.0** - faster, smoother UI with 7 reorganized settings categories.
-Multilingual support (English + German) with 400+ translated strings and automatic language detection.
+## What's New in v1.8.2
 
-**Offline-first with WebDAV sync** - create and edit notes without internet, sync automatically on WiFi.
-Configurable intervals (15/30/60 min) balance sync frequency with battery life (~0.4% drain per day).
+The app has evolved significantly since the initial Compose rewrite. Here's where things stand today:
 
-**Checklists with Obsidian compatibility** - tap to check, drag to reorder, export as GitHub-style Markdown.
-Edit in Obsidian on desktop, sync back to your phone. Full round-trip support.
+**Glance Widgets (v1.7+)** – homescreen widgets built with Jetpack Glance show your latest notes
+or a quick-add button, styled with Material 3 Dynamic Colors to match your wallpaper.
 
-Built with **Material Design 3** and Dynamic Colors on Android 12+. Dark mode, selection mode for batch
-operations, and automatic saving. The included Docker container gets a WebDAV server running in 5 minutes.
+**True Offline-First Architecture** – local file-based JSON storage is the single source of truth.
+Create, edit, and delete notes without any connectivity. Sync happens automatically via WorkManager
+when WiFi is available.
 
-## Features
+**Interactive Checklists** – tap to toggle, long-press to reorder, auto-sort checked items to the bottom.
+Exports as GitHub-flavored Markdown (checked/unchecked task syntax), full round-trip compatible with Obsidian.
 
-- **Jetpack Compose UI** - Modern interface with smooth animations and responsive design
-- **Checklists** - Tap-to-check, drag & drop reordering, GitHub-style Markdown export
-- **Multilingual** - English + German with automatic language detection
-- **Offline-First** - Works without internet, local storage is source of truth
-- **WebDAV Sync** - Works with Nextcloud, ownCloud, any WebDAV server
-- **Battery Optimized** - ~0.2-0.8% per day, Doze Mode compatible
-- **Material Design 3** - Dark mode, Dynamic Colors, selection mode
-- **Desktop Integration** - Markdown export for VS Code, Typora, Obsidian
-- **Self-Hosted** - Your data stays on your server. No tracking, no analytics
+**Swipe Gestures & Undo** – swipe-to-delete with a Snackbar undo window. Batch operations via
+selection mode for deleting or exporting multiple notes at once.
+
+**Smart Conflict Resolution** – E-Tag caching makes syncs ~20× faster. When conflicts arise,
+UUID + timestamp logic ensures no data is silently lost.
+
+## Full Feature Set
+
+- **Jetpack Compose UI** – modern Material Design 3 interface with smooth animations
+- **Glance Homescreen Widgets** – quick note access and creation from the launcher
+- **Dynamic Colors** – adapts to your wallpaper on Android 12+ (Material You)
+- **Interactive Checklists** – tap, reorder, auto-sort, Markdown export
+- **Swipe-to-Delete with Undo** – accidental deletion protection via Snackbar
+- **Offline-First** – works fully without internet, local storage is always authoritative
+- **WebDAV Sync** – compatible with Nextcloud, ownCloud, or any WebDAV server
+- **Configurable Sync Intervals** – 15 / 30 / 60 minutes, WiFi-only option
+- **Battery Optimized** – ~0.2–0.8 % per day, Doze Mode compatible via WorkManager
+- **Multilingual** – English + German, 400+ translated strings, automatic detection
+- **Desktop Integration** – Markdown export for VS Code, Typora, Obsidian
+- **Selection Mode** – batch delete, export, or manage multiple notes
+- **Self-Hosted Backend** – 5-minute Docker setup, your data stays on your server
+- **Zero Tracking** – no analytics, no telemetry, no third-party services
+- **Available on F-Droid** – fully open-source, reproducible builds
 
 ## Architecture
 
-**Android App** built with Kotlin, Jetpack Compose, Material Design 3. Uses WorkManager for reliable
-background sync even in Doze Mode. StateFlow for reactive UI updates.
+**Android App** – Kotlin, Jetpack Compose, MVVM with StateFlow, file-based JSON persistence via
+`NotesStorage`, WorkManager for reliable background sync even in Doze Mode. Min SDK 24 (Android 7.0).
 
-**WebDAV Protocol** for sync - standardized and widely supported. No custom server needed.
-Included Docker setup uses httpd-alpine with mod_dav.
+**Glance Widgets** – `GlanceAppWidget` + `GlanceAppWidgetReceiver` with a dedicated
+`WidgetViewModel`. Independent data flow so widgets stay responsive even when the app is closed.
 
-**Storage**: JSON files in `/notes/` for primary data, optional Markdown in `/notes-md/` for desktop.
-Each note gets a UUID and timestamps for conflict resolution. E-Tag caching for 20x faster syncs.
+**WebDAV Protocol** – standardized, widely supported, no custom server needed.
+Included Docker setup uses `bytemark/webdav` with automatic HTTPS via reverse proxy.
 
-**Setup Time**: 5 minutes for server (Docker), 2 minutes for app configuration
+**Storage Model** – file-based JSON locally (no SQL database), JSON files in `/notes/` on the server,
+optional Markdown in `/notes-md/` for desktop editing. Each note has a UUID and timestamps for conflict resolution.
+
+**Setup Time** – 5 minutes for the server (Docker one-liner), 2 minutes for app configuration.

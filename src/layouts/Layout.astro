@@ -91,42 +91,25 @@ const ogImage = new URL(image, Astro.site || "https://dettmer.dev");
 
     <meta name="generator" content={Astro.generator} />
 
-    <style>
-      /* Prevent FOUT - Load system fonts immediately, hide body until fonts ready */
-      html {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-      }
-      body {
-        font-family:
-          "Josefin Sans",
-          -apple-system,
-          BlinkMacSystemFont,
-          "Segoe UI",
-          system-ui,
-          sans-serif;
-        visibility: hidden;
-      }
-      body.fonts-loaded {
-        visibility: visible;
-      }
-    </style>
+    <!-- Font loading: preload critical fonts to minimize FOUT -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&family=Pacifico&display=swap"
+      as="style"
+    />
+    <link
       href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&family=Pacifico&display=swap"
       rel="stylesheet"
-      onload="document.body.classList.add('fonts-loaded')"
     />
-    <noscript
-      ><link
-        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&family=Pacifico&display=swap"
-        rel="stylesheet"
-      /></noscript
-    >
-    <script>
-      // Fallback if font loads too slow (show after 100ms)
-      setTimeout(() => document.body.classList.add("fonts-loaded"), 100);
-    </script>
+    <style>
+      /* Smooth font swap transition instead of hard flash */
+      body {
+        font-family: var(--body);
+        transition: opacity 0.15s ease;
+      }
+    </style>
   </head>
   <body>
     <Header />

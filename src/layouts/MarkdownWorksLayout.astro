@@ -13,7 +13,7 @@ const structuredData = isSimpleNotes
       alternateName: "simple-notes-sync",
       description: frontmatter.description,
       applicationCategory: "UtilitiesApplication",
-      operatingSystem: "Android 8.0+",
+      operatingSystem: "Android 7.0+",
       offers: {
         "@type": "Offer",
         price: "0",
@@ -26,7 +26,7 @@ const structuredData = isSimpleNotes
       },
       downloadUrl: "https://github.com/inventory69/simple-notes-sync/releases/latest",
       installUrl: "https://f-droid.org/packages/dev.dettmer.simplenotes/",
-      softwareVersion: "1.5.0",
+      softwareVersion: "1.8.2",
       screenshot: `https://dettmer.dev${frontmatter.image.url}`,
     }
   : {
@@ -98,6 +98,16 @@ const breadcrumbData = {
       alt={frontmatter.worksImage2.alt}
       loading="lazy"
     />
+    {
+      frontmatter.worksImage3 && (
+        <img
+          class="pro-img"
+          src={frontmatter.worksImage3.url}
+          alt={frontmatter.worksImage3.alt}
+          loading="lazy"
+        />
+      )
+    }
   </div>
   <slot />
   <ul class="badge__list">
@@ -108,7 +118,7 @@ const breadcrumbData = {
         <li>
           <>
             <span class="badge badge--item">WEBSITE</span>
-            <a class="badge__link" href={frontmatter.website} target="_blank">
+            <a class="badge__link" href={frontmatter.website} target="_blank" rel="noopener noreferrer">
               {frontmatter.website}
             </a>
           </>
@@ -120,8 +130,32 @@ const breadcrumbData = {
         <li>
           <>
             <span class="badge badge--item">GITHUB</span>
-            <a class="badge__link" href={frontmatter.github} target="_blank">
+            <a class="badge__link" href={frontmatter.github} target="_blank" rel="noopener noreferrer">
               {frontmatter.github}
+            </a>
+          </>
+        </li>
+      )
+    }
+    {
+      frontmatter.fdroid && (
+        <li>
+          <>
+            <span class="badge badge--item">F-DROID</span>
+            <a class="badge__link" href={frontmatter.fdroid} target="_blank" rel="noopener noreferrer">
+              {frontmatter.fdroid}
+            </a>
+          </>
+        </li>
+      )
+    }
+    {
+      frontmatter.download && (
+        <li>
+          <>
+            <span class="badge badge--item">DOWNLOAD</span>
+            <a class="badge__link" href={frontmatter.download} target="_blank" rel="noopener noreferrer">
+              {frontmatter.download}
             </a>
           </>
         </li>

@@ -1,9 +1,9 @@
 ---
+import Layout from "../layouts/Layout.astro";
 const description = "404";
-import "../styles/global.css";
 ---
 
-<layout>
+<Layout pageTitle="404 - Page Not Found">
   <div class="lost">
     <div class="gif">
       <img src="/images/404.webp" role="presentation" width="300" height="259" decoding="async" />
@@ -14,4 +14,4 @@ import "../styles/global.css";
       <a class="lost__link" href="/">Return Home</a>
     </p>
   </div>
-</layout>
+</Layout>
