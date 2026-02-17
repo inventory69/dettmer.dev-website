@@ -18,10 +18,18 @@ const projectsCollection = defineCollection({
       url: z.string(),
       alt: z.string(),
     }),
+    worksImage3: z
+      .object({
+        url: z.string(),
+        alt: z.string(),
+      })
+      .optional(),
     platform: z.string(),
     stack: z.string(),
     website: z.string().optional(),
     github: z.string().optional(),
+    fdroid: z.string().optional(),
+    download: z.string().optional(),
   }),
 });
 
