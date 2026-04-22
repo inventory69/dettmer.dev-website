@@ -1,0 +1,97 @@
+---
+import Layout from "../../layouts/Layout.astro";
+const pageTitle = "Datenschutzerklärung – Simple Notes Sync | dettmer.dev";
+const description =
+  "Datenschutzerklärung für die Android-App Simple Notes Sync von Fabian Dettmer.";
+---
+
+<Layout pageTitle={pageTitle} description={description}>
+  <h1>Datenschutzerklärung</h1>
+  <p class="legal__lead">
+    Datenschutzerklärung für die Android-App <strong>Simple Notes Sync</strong>
+    (Paketname: <code>dev.dettmer.simplenotes</code>), entwickelt von Fabian Dettmer.
+  </p>
+
+  <h2>1. Verantwortlicher</h2>
+  <p class="legal__block">
+    Fabian Dettmer<br />
+    E-Mail: <a class="legal__link" href="mailto:admin@dettmer.dev">admin@dettmer.dev</a>
+  </p>
+
+  <h2>2. Grundsatz: Keine Datenerhebung durch den Entwickler</h2>
+  <p class="legal__block">
+    Simple Notes Sync erhebt, speichert, verarbeitet oder übermittelt keinerlei
+    personenbezogene Daten an den Entwickler oder Dritte. Es sind keine
+    Analyse-Bibliotheken, Tracking-SDKs, Werbenetzwerke oder Absturzberichte-Dienste
+    in der App integriert.
+  </p>
+
+  <h2>3. Lokale Datenspeicherung</h2>
+  <p class="legal__block">
+    Alle Notizen werden ausschließlich lokal auf dem Gerät des Nutzers gespeichert.
+    Auf diese Daten hat der Entwickler keinen Zugriff.
+  </p>
+
+  <h2>4. Synchronisation (WebDAV)</h2>
+  <p class="legal__block">
+    Die App bietet eine optionale Synchronisation über das WebDAV-Protokoll.
+    Der Nutzer konfiguriert dabei selbst einen WebDAV-Server seiner Wahl
+    (z.&nbsp;B. einen eigenen selbst gehosteten Server oder einen Dienst wie Nextcloud).
+    Die Verbindung erfolgt ausschließlich zwischen dem Gerät des Nutzers und dem
+    vom Nutzer gewählten Server. Der Entwickler hat zu keinem Zeitpunkt Zugriff
+    auf diese Verbindung oder die übertragenen Daten.
+  </p>
+
+  <h2>5. Internetberechtigung</h2>
+  <p class="legal__block">
+    Die App benötigt die Berechtigung <code>INTERNET</code>, um die optionale
+    WebDAV-Synchronisation durchführen zu können. Diese Berechtigung wird
+    ausschließlich für die Verbindung zum vom Nutzer konfigurierten Server genutzt.
+    Es findet keine Kommunikation mit Servern des Entwicklers statt.
+  </p>
+
+  <h2>6. Lokales Backup</h2>
+  <p class="legal__block">
+    Die App bietet eine optionale Export- und Importfunktion (JSON-Datei,
+    optional verschlüsselt). Diese Daten verlassen das Gerät nur, wenn der Nutzer
+    sie aktiv exportiert und selbst weiterleitet.
+  </p>
+
+  <h2>7. Keine Weitergabe an Dritte</h2>
+  <p class="legal__block">
+    Da keinerlei Daten erhoben werden, findet keine Weitergabe an Dritte statt.
+  </p>
+
+  <h2>8. Rechte der Nutzer</h2>
+  <p class="legal__block">
+    Da der Entwickler keine personenbezogenen Daten verarbeitet, bestehen im
+    Verhältnis zum Entwickler keine datenschutzrechtlichen Auskunfts-,
+    Berichtigungs- oder Löschungsansprüche. Anfragen können dennoch jederzeit
+    per E-Mail an
+    <a class="legal__link" href="mailto:admin@dettmer.dev">admin@dettmer.dev</a>
+    gerichtet werden.
+  </p>
+
+  <h2>9. Open Source</h2>
+  <p class="legal__block">
+    Simple Notes Sync ist freie Open-Source-Software (Lizenz: AGPL-3.0).
+    Der vollständige Quellcode ist einsehbar unter:
+    <a
+      class="legal__link"
+      href="https://github.com/inventory69/simple-notes-sync"
+      target="_blank"
+      rel="noopener noreferrer"
+      >github.com/inventory69/simple-notes-sync</a
+    >.
+  </p>
+
+  <h2>10. Änderungen dieser Datenschutzerklärung</h2>
+  <p class="legal__block">
+    Diese Datenschutzerklärung kann bei wesentlichen Änderungen an der App
+    aktualisiert werden. Das Datum der letzten Aktualisierung ist unten angegeben.
+  </p>
+
+  <p class="legal__block">
+    <small>Stand: April 2026</small>
+  </p>
+</Layout>
