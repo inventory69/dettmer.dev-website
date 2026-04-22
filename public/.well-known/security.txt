@@ -1,0 +1,7 @@
+Contact: mailto:abuse@dettmer.dev
+Contact: mailto:postmaster@dettmer.dev
+Contact: https://dettmer.dev/kontakt/
+Expires: 2027-04-22T00:00:00.000Z
+Preferred-Languages: de, en
+Canonical: https://dettmer.dev/.well-known/security.txt
+Policy: https://dettmer.dev/impressum/

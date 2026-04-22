@@ -29,5 +29,30 @@ const year = new Date().getFullYear();
         class="footer__link">milky way</a
       > · built with astro · probably overengineered</small
     >
+    <small class="footer__legal">
+      <a href="/impressum/" class="footer__link footer__link--muted">Impressum</a>
+      <span aria-hidden="true">·</span>
+      <a href="/kontakt/" class="footer__link footer__link--muted">Kontakt</a>
+    </small>
   </div>
 </footer>
+
+<style>
+  .footer__legal {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.75rem;
+    opacity: 0.55;
+  }
+  .footer__legal a {
+    text-decoration: none;
+  }
+  .footer__legal a:hover {
+    text-decoration: underline;
+    opacity: 1;
+  }
+  .footer__legal span {
+    margin: 0 0.35rem;
+    opacity: 0.7;
+  }
+</style>
