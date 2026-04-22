@@ -283,6 +283,25 @@ li {
   text-decoration-thickness: 3px;
 }
 
+/* Legal Links */
+.legal__link {
+  color: var(--text-link);
+  text-decoration: underline;
+  text-decoration-color: var(--text-link);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  transition:
+    text-decoration-color 0.3s ease,
+    color 0.3s ease,
+    text-decoration-thickness 0.2s ease;
+}
+
+.legal__link:hover {
+  color: var(--button);
+  text-decoration-color: var(--button);
+  text-decoration-thickness: 3px;
+}
+
 /* Skills */
 .skills {
   margin-top: 8px;
